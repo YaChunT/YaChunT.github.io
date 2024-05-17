@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/yamllint.json": [
+            "file:///Users/yachun/Desktop/website/astrofy/.github/workflows/deploy.yml",
+            "file:///Users/yachun/Desktop/website/astrofy/.github/FUNDING.yml"
+        ]
+    }
+}
