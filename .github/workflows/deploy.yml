@@ -52,7 +52,7 @@ jobs:
         run: pnpm build
 
       - name: Upload build artifacts for deployment
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v1
         with:
           name: github-pages
           path: ./dist  # Ensure this path points to your build output directory
