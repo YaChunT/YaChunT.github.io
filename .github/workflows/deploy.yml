@@ -49,6 +49,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check Node.js and PNPM versions
+        run: |
+          node --version
+          pnpm --version
+
+
       - name: Build project
         run: pnpm build
 
