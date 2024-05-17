@@ -38,22 +38,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
           version: 9.1.1
-          node-version: 20
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Check Node.js and PNPM versions
-        run: |
-          node --version
-          pnpm --version
-
 
       - name: Build project
         run: pnpm build
