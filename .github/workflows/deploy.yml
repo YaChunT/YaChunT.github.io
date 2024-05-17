@@ -57,6 +57,16 @@ jobs:
           name: github-pages
           path: ./dist  # Ensure this path points to your build output directory
 
+      - name: Find Symlinks
+        run: find ./dist -type l
+
+      - name: Find Hard Links
+        run: find ./dist -type f -links +1
+
+      - name: Print size of the directory
+        run: du -sh ./dist
+
+
 
 
   deploy:
