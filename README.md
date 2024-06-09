@@ -1,6 +1,6 @@
 ## Installation
 
-Run the following command in your terminal
+Run the following command in your terminal:
 
 ```bash
 pnpm install
