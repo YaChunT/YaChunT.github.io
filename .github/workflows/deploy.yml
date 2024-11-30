@@ -7,34 +7,16 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pages: write    # Allows deployment to GitHub Pages
+  id-token: write # Required for OpenID Connect (OIDC) authentication
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout your repository using git
-      #   uses: actions/checkout@v4
-      # - name: Install, build, and upload your site
-      #   uses: withastro/action@v2
-      #   # with:
-      #   #   path: . # The root location of your Astro project inside the repository. (optional)
-      #   #   node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-      #   #   package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 20
-
-      # - name: Setup PNPM
-      #   uses: pnpm/action-setup@v2
-      #   with:
-      #     version: 9.1.1 # or the version you specified in your package.json
-      #     node-version: 20
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -54,33 +36,16 @@ jobs:
       - name: Upload build artifacts for deployment
         uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
           path: ./dist  # Ensure this path points to your build output directory
-
-      - name: Find Symlinks
-        run: find ./dist -type l
-
-      - name: Find Hard Links
-        run: find ./dist -type f -links +1
-
-      - name: Print size of the directory
-        run: du -sh ./dist
-
-
-
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write    # Allows deployment to GitHub Pages
+      id-token: write # Required for OIDC authentication
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v1
-        with:
-          name: github-pages
-
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v1
